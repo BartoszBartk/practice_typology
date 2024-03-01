@@ -92,8 +92,13 @@ bars_all_comb <- ggplot(aep_simple_comb, aes(x = time, y = Rating, fill = COMB))
        x = "", y = "Rating") +
   theme(plot.title = element_text(hjust = 0.5)) +
   scale_x_discrete(limits = aep_simple_comb$time) +
-  scale_fill_discrete(breaks = c("Capability", "Opportunity", "Motivation"))
+  scale_fill_discrete(breaks = c("Capability", "Opportunity", "Motivation")) +
+  scale_fill_manual(values=c("#D9E2F3", 
+                             "#EFE599", 
+                             "#C5E0B3"))
 bars_all_comb
+# save plot
+ggsave("Fig_1_Mean_TDF_ratings_COMB.png", bars_all_comb)
 
 ############
 # Clustering for all practices
@@ -160,6 +165,7 @@ fig_km4_ <- fig_km4_ +
   #labs(title = "Clusters of practices with at least three responses") +
   #theme(plot.title = element_text(hjust = 0.5))
 fig_km4_
+ggsave("Fig_2_Clusters_kmeans4_min3responses.png", fig_km4_, width = 1000, height = 500, units = "px")
 
 #k-medoids
 fviz_nbclust(data_min3, pam, method = "wss")
@@ -183,10 +189,11 @@ fig_kmed_
 ############
 
 # plot multiple figures
-ggarrange(fig_km6, fig_km4_, fig_kmed6, fig_kmed_,
-          labels = c("A: k-means, 6 clusters", "C: k-means, 4 clusters (min. 3 responses)", "B: k-medoids, 6 clusters", "D: k-medoids, 4 clusters (min. 3 responses)"),
-          label.x = c(-0.05, -0.1, -0.05, -0.1),
-          ncol = 2, nrow = 2)
+cluster_variants <- ggarrange(fig_km6, fig_km4_, fig_kmed6, fig_kmed_,
+                              labels = c("A: k-means, 6 clusters", "C: k-means, 4 clusters (min. 3 responses)", "B: k-medoids, 6 clusters", "D: k-medoids, 4 clusters (min. 3 responses)"),
+                              label.x = c(-0.05, -0.1, -0.05, -0.1),
+                              ncol = 2, nrow = 2)
+ggsave("Fig_SM_All_clustering_variants.png", cluster_variants, width = 2000, height = 1000, units = "px")
 
 ############
 # TDF bar charts for individual clusters
@@ -234,6 +241,7 @@ bars_cluster1 <- ggplot(cluster1_simple, aes(x = time, y = Rating, fill = COMB))
                              "#EFE599", 
                              "#C5E0B3")) 
 bars_cluster1
+ggsave("Fig_Mean_TDF_cluster1.png", bars_cluster1, width = 1000, height = 500, units = "px")
 
 ## cluster 2
 # reshape
@@ -265,6 +273,7 @@ bars_cluster2 <- ggplot(cluster2_simple, aes(x = time, y = Rating, fill = COMB))
                              "#EFE599", 
                              "#C5E0B3")) 
 bars_cluster2
+ggsave("Fig_Mean_TDF_cluster2.png", bars_cluster2, width = 1000, height = 500, units = "px")
 
 ## cluster 3
 # reshape
@@ -296,6 +305,7 @@ bars_cluster3 <- ggplot(cluster3_simple, aes(x = time, y = Rating, fill = COMB))
                              "#EFE599", 
                              "#C5E0B3")) 
 bars_cluster3
+ggsave("Fig_Mean_TDF_cluster3.png", bars_cluster3, width = 1000, height = 500, units = "px")
 
 ## cluster 4
 # reshape
@@ -327,13 +337,15 @@ bars_cluster4 <- ggplot(cluster4_simple, aes(x = time, y = Rating, fill = COMB))
                              "#EFE599", 
                              "#C5E0B3")) 
 bars_cluster4
+ggsave("Fig_Mean_TDF_cluster4.png", bars_cluster4, width = 1000, height = 500, units = "px")
 
 # all in one plot
-ggarrange(bars_cluster1, bars_cluster2, bars_cluster3, bars_cluster4,
-          labels = c("A: Cluster 1 (Reduced soil pressure)",
-                     "B: Cluster 2 (Legumes, Reduced mowing, Reduced tillage, Rotational fallow)",
-                     "C: Cluster 3 (Buffer strips, Cover crops, Extensive grazing, Flower strips, No mineral fertilizer)",
-                     "D: Cluster 4 (Agroforestry, Hedges, Permanent grassland)"),
-          hjust = -0.05,
-          vjust = 1.0,
-          ncol = 2, nrow = 2)
+bars_clusters <- ggarrange(bars_cluster1, bars_cluster2, bars_cluster3, bars_cluster4,
+                          labels = c("A: Cluster 1 (Reduced soil pressure)",
+                                    "B: Cluster 2 (Legumes, Reduced mowing, Reduced tillage, Rotational fallow)",
+                                    "C: Cluster 3 (Buffer strips, Cover crops, Extensive grazing, Flower strips, No mineral fertilizer)",
+                                    "D: Cluster 4 (Agroforestry, Hedges, Permanent grassland)"),
+                          hjust = -0.05,
+                          vjust = 1.0,
+                          ncol = 2, nrow = 2)
+ggsave("Fig_SM_Mean_TDF_cluster1234.png", bars_clusters, width = 2000, height = 1000, units = "px")
