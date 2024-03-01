@@ -92,10 +92,8 @@ bars_all_comb <- ggplot(aep_simple_comb, aes(x = time, y = Rating, fill = COMB))
        x = "", y = "Rating") +
   theme(plot.title = element_text(hjust = 0.5)) +
   scale_x_discrete(limits = aep_simple_comb$time) +
-  scale_fill_discrete(breaks = c("Capability", "Opportunity", "Motivation")) +
-  scale_fill_manual(values=c("#D9E2F3", 
-                             "#EFE599", 
-                             "#C5E0B3"))
+  scale_fill_manual(values = c("#D9E2F3", "#EFE599", "#C5E0B3"),
+                    breaks = c("Capability", "Opportunity", "Motivation"))
 bars_all_comb
 # save plot
 ggsave("Fig_1_Mean_TDF_ratings_COMB.png", bars_all_comb)
@@ -236,10 +234,8 @@ bars_cluster1 <- ggplot(cluster1_simple, aes(x = time, y = Rating, fill = COMB))
        x = "", y = "Rating") +
   #theme(plot.title = element_text(hjust = 0.5)) +
   scale_x_discrete(limits = aep_simple_comb$time) +
-  scale_fill_discrete(breaks = c("Capability", "Opportunity", "Motivation")) +
-  scale_fill_manual(values=c("#D9E2F3", 
-                             "#EFE599", 
-                             "#C5E0B3")) 
+  scale_fill_manual(values = c("#D9E2F3", "#EFE599", "#C5E0B3"),
+                    breaks = c("Capability", "Opportunity", "Motivation"))
 bars_cluster1
 ggsave("Fig_Mean_TDF_cluster1.png", bars_cluster1, width = 1000, height = 500, units = "px")
 
@@ -268,10 +264,8 @@ bars_cluster2 <- ggplot(cluster2_simple, aes(x = time, y = Rating, fill = COMB))
        x = "", y = "Rating") +
   #theme(plot.title = element_text(hjust = 0.5)) +
   scale_x_discrete(limits = aep_simple_comb$time) +
-  scale_fill_discrete(breaks = c("Capability", "Opportunity", "Motivation")) +
-  scale_fill_manual(values=c("#D9E2F3", 
-                             "#EFE599", 
-                             "#C5E0B3")) 
+  scale_fill_manual(values = c("#D9E2F3", "#EFE599", "#C5E0B3"),
+                    breaks = c("Capability", "Opportunity", "Motivation"))
 bars_cluster2
 ggsave("Fig_Mean_TDF_cluster2.png", bars_cluster2, width = 1000, height = 500, units = "px")
 
@@ -300,10 +294,8 @@ bars_cluster3 <- ggplot(cluster3_simple, aes(x = time, y = Rating, fill = COMB))
        x = "", y = "Rating") +
   #theme(plot.title = element_text(hjust = 0.5)) +
   scale_x_discrete(limits = aep_simple_comb$time) +
-  scale_fill_discrete(breaks = c("Capability", "Opportunity", "Motivation")) +
-  scale_fill_manual(values=c("#D9E2F3", 
-                             "#EFE599", 
-                             "#C5E0B3")) 
+  scale_fill_manual(values = c("#D9E2F3", "#EFE599", "#C5E0B3"),
+                    breaks = c("Capability", "Opportunity", "Motivation"))
 bars_cluster3
 ggsave("Fig_Mean_TDF_cluster3.png", bars_cluster3, width = 1000, height = 500, units = "px")
 
@@ -332,20 +324,19 @@ bars_cluster4 <- ggplot(cluster4_simple, aes(x = time, y = Rating, fill = COMB))
        x = "", y = "Rating") +
   #theme(plot.title = element_text(hjust = 0.5)) +
   scale_x_discrete(limits = aep_simple_comb$time) +
-  scale_fill_discrete(breaks = c("Capability", "Opportunity", "Motivation")) +
-  scale_fill_manual(values=c("#D9E2F3", 
-                             "#EFE599", 
-                             "#C5E0B3")) 
+  scale_fill_manual(values = c("#D9E2F3", "#EFE599", "#C5E0B3"),
+                    breaks = c("Capability", "Opportunity", "Motivation"))
 bars_cluster4
 ggsave("Fig_Mean_TDF_cluster4.png", bars_cluster4, width = 1000, height = 500, units = "px")
 
 # all in one plot
 bars_clusters <- ggarrange(bars_cluster1, bars_cluster2, bars_cluster3, bars_cluster4,
-                          labels = c("A: Cluster 1 (Reduced soil pressure)",
-                                    "B: Cluster 2 (Legumes, Reduced mowing, Reduced tillage, Rotational fallow)",
-                                    "C: Cluster 3 (Buffer strips, Cover crops, Extensive grazing, Flower strips, No mineral fertilizer)",
-                                    "D: Cluster 4 (Agroforestry, Hedges, Permanent grassland)"),
+                          labels = c("A: Cluster 1 (Agroforestry, Hedges, Permanent grassland)",
+                                    "B: Cluster 2 (Legumes, Reduced mowing, Reduced soil pressure, Reduced tillage, Rotational fallow)",
+                                    "C: Cluster 3 (Cover crops, Extensive grazing, Flower strips, No mineral fertilizer)",
+                                    "D: Cluster 4 (Buffer strips)"),
                           hjust = -0.05,
                           vjust = 1.0,
                           ncol = 2, nrow = 2)
+bars_clusters
 ggsave("Fig_SM_Mean_TDF_cluster1234.png", bars_clusters, width = 2000, height = 1000, units = "px")
